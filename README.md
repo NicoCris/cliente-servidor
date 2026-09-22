@@ -84,17 +84,22 @@ Salida forzada        Presiona Ctrl + C
 
 ## 🗄️ Esquema de Base de DatosEl archivo chat.db almacena los registros bajo la tabla mensajes:
 
+```text
 SQLCREATE TABLE IF NOT EXISTS mensajes (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
     contenido TEXT NOT NULL,
     fecha_envio DATETIME DEFAULT CURRENT_TIMESTAMP,
     ip_cliente TEXT NOT NULL
 );
-
+```
 Consultar los mensajes almacenados
 Podes verificar el contenido de la base de datos directamente desde la terminal:
 
-python -c "import sqlite3; conn = sqlite3.connect('chat.db'); c = conn.cursor(); c.execute('SELECT * FROM mensajes'); [print(r) for r in c.fetchall()]; conn.close()"
+```text
+python -c "import sqlite3; conn = sqlite3.connect('chat.db'); c = conn.cursor(); c.execute('SELECT * FROM mensajes'); 
+[print(r) for r in c.fetchall()]; 
+conn.close()"
+```
 
 ## ⚙️ ConfiguraciónPuedes modificar las opciones de red y almacenamiento en config.py:
 
