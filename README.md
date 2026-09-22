@@ -22,11 +22,11 @@ No requiere librerías externas: utiliza exclusivamente los módulos de la libre
 ┌─────────────┐         TCP/IP          ┌─────────────────────────┐
 │   Cliente 1 │ ◄──────────────────────►│                         │
 └─────────────┘                         │        Servidor         │
-│       (server.py)       │
+              │       (server.py)       │
 ┌─────────────┐         TCP/IP          │                         │
-│   Cliente 2 │ ◄──────────────────────►│  + Hilos (threading)   │
+│   Cliente 2 │ ◄──────────────────────►│  + Hilos (threading)    │
 └─────────────┘                         │                         │
-└────────────┬────────────┘
+                                        └────────────┬────────────┘
 ┌─────────────┐         TCP/IP                       │
 │   Cliente N │ ◄──────────────────────►             ▼
 └─────────────┘                         ┌─────────────────────────┐
@@ -39,7 +39,7 @@ No requiere librerías externas: utiliza exclusivamente los módulos de la libre
 4. **Desconexión:** Al recibir `/salir` o `éxito`, el cliente y el servidor cierran la conexión de forma ordenada y liberan los recursos
 ---
 
-## 📁 Estructura del Proyecto
+## 📁 Estructura del Proyectos
 
 ```text
 
@@ -49,36 +49,38 @@ cliente_servidor/
 ├── server.py       # Servidor TCP multihilo y despacho de clientes
 ├── client.py       # Cliente interactivo de terminal
 ├── chat.db         # Archivo SQLite (creado automáticamente al iniciar)
+```
+---
 
+### 📋 Requisitos PreviosPython 3.6 o superior instalado.   
+No se necesitan dependencias externas (usa socket, threading, sqlite3, etc.).
 
-📋 Requisitos PreviosPython 3.6 o superior instalado.   No se necesitan dependencias externas (usa socket, threading, sqlite3, etc.).
+### 🛠️ Instalación y Uso.
 
-🛠️ Instalación y Uso.
-
-# 1. Clonar el repositorio
+#### 1. Clonar el repositorio
 
 git clone [https://github.com/tu-usuario/tu-repositorio.git](https://github.com/tu-usuario/tu-repositorio.git)
 
 cd tu-repositorio
 
-2. Iniciar el ServidorEn una terminal:
+#### 2. Iniciar el ServidorEn una terminal:
 
 python server.py
 
 El servidor comenzará a escuchar en 127.0.0.1:5000 y creará la base de datos si no existe.
 
-3. Iniciar uno o varios ClientesEn una o más terminales adicionales:
+#### 3. Iniciar uno o varios ClientesEn una o más terminales adicionales:
 
 python client.py
 
+#### 4. Enviar Mensajes y Comandos
 
-4. Enviar Mensajes y Comandos
 Acción                Comando / Entrada
 Enviar mensaje        Escribe cualquier texto y presiona Enter
 Desconectarse         Escribe /salir o éxito
 Salida forzada        Presiona Ctrl + C
 
-🗄️ Esquema de Base de DatosEl archivo chat.db almacena los registros bajo la tabla mensajes:
+### 🗄️ Esquema de Base de DatosEl archivo chat.db almacena los registros bajo la tabla mensajes:
 
 SQLCREATE TABLE IF NOT EXISTS mensajes (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -92,7 +94,7 @@ Podes verificar el contenido de la base de datos directamente desde la terminal:
 
 python -c "import sqlite3; conn = sqlite3.connect('chat.db'); c = conn.cursor(); c.execute('SELECT * FROM mensajes'); [print(r) for r in c.fetchall()]; conn.close()"
 
-⚙️ ConfiguraciónPuedes modificar las opciones de red y almacenamiento en config.py:
+### ⚙️ ConfiguraciónPuedes modificar las opciones de red y almacenamiento en config.py:
 
 PythonHOST = "127.0.0.1"    # Dirección de escucha
 PORT = 5000           # Puerto TCP
