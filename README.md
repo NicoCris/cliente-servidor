@@ -18,21 +18,23 @@ No requiere librerías externas: utiliza exclusivamente los módulos de la libre
 ---
 
 ## 🏗️ Arquitectura y Funcionamiento
-
+```text
 ┌─────────────┐         TCP/IP          ┌─────────────────────────┐
-│   Cliente 1 │ ◄──────────────────────►│                         │
+│  Cliente 1  │ ◄─────────────────────► │                         │
 └─────────────┘                         │        Servidor         │
-              │       (server.py)       │
+                                        │       (server.py)       │
 ┌─────────────┐         TCP/IP          │                         │
-│   Cliente 2 │ ◄──────────────────────►│  + Hilos (threading)    │
+│  Cliente 2  │ ◄─────────────────────► │  + Hilos (threading)    │
 └─────────────┘                         │                         │
                                         └────────────┬────────────┘
 ┌─────────────┐         TCP/IP                       │
-│   Cliente N │ ◄──────────────────────►             ▼
-└─────────────┘                         ┌─────────────────────────┐
+│  Cliente N  │ ◄─────────────────────►              │
+└─────────────┘                                      ▼
+                                        ┌─────────────────────────┐
                                         │  Base de Datos (chat.db)│
                                         │  SQLite + db_lock       │
                                         └─────────────────────────┘
+```
 1. **Servidor:** Configura el socket TCP, inicializa la tabla en la base de datos y queda a la escucha de nuevas conexiones.
 2. **Cliente:** Se conecta a la dirección y puerto del servidor.
 3. **Flujo de mensajes:** Por cada cliente conectado, el servidor despacha un hilo (`manejar_cliente`). Cuando el cliente envía un texto (UTF-8), el hilo adquiere el lock, guarda el registro en SQLite y devuelve una confirmación.
