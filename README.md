@@ -61,19 +61,25 @@ No se necesitan dependencias externas (usa socket, threading, sqlite3, etc.).
 
 ### 1. Clonar el repositorio
 
+```text
 git clone [https://github.com/tu-usuario/tu-repositorio.git](https://github.com/tu-usuario/tu-repositorio.git)
 
 cd tu-repositorio
+```
 
 ### 2. Iniciar el ServidorEn una terminal:
 
+```text
 python server.py
+```
 
 El servidor comenzará a escuchar en 127.0.0.1:5000 y creará la base de datos si no existe.
 
 ### 3. Iniciar uno o varios ClientesEn una o más terminales adicionales:
 
+```text
 python client.py
+```
 
 ### 4. Enviar Mensajes y Comandos
 
@@ -103,8 +109,10 @@ conn.close()"
 
 ## ⚙️ ConfiguraciónPuedes modificar las opciones de red y almacenamiento en config.py:
 
+```text
 PythonHOST = "127.0.0.1"    # Dirección de escucha
 PORT = 5000           # Puerto TCP
 BUFFER_SIZE = 1024    # Tamaño máximo de buffer de lectura
 ENCODING = "utf-8"    # Codificación de caracteres
 DB_NAME = "chat.db"   # Nombre del archivo SQLite
+```
